@@ -1,0 +1,88 @@
+@import "../../variables";
+
+.header {
+  height: $headerHeight;
+  padding-top: 40px;
+  background: $bgColor;
+
+  .leftBlock {
+    width: 50%;
+    display: flex;
+
+    .avatar {
+      height: 168px;
+      width: 168px;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      margin-right: 24px;
+    }
+
+    .info {
+      flex-grow: 1;
+
+      .name {
+        font-weight: 500;
+        font-size: 40px;
+        line-height: 48px;
+        @extend %onHoverField;
+        @extend %onFocusField;
+      }
+
+
+      .location {
+        font-size: 16px;
+        line-height: 24px;
+        margin-top: 8px;
+        @extend %onHoverField;
+        @extend %onFocusField;
+      }
+
+      .language {
+        display: flex;
+        margin-top: 8px;
+
+        span {
+          font-size: 24px;
+        }
+        p {
+          font-size: 16px;
+          line-height: 24px;
+          margin-left: 8px;
+        }
+      }
+      .skills {
+        display: flex;
+        margin-top: 16px;
+
+        .skill {
+          color: #fff;
+          background-color: #333;
+          padding: 4px 8px;
+          border-radius: 4px;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 16px;
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+  .print {
+    display: flex;
+    align-self: flex-start;
+    align-items: center;
+    color: $linkColor;
+
+    &:hover {
+      color: $linkHoverColor;
+      svg {
+        fill: $linkHoverColor;
+      }
+    }
+    svg {
+      height: 24px;
+      margin-right: 8px;
+    }
+  }
+
+}

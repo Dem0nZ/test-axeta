@@ -1,0 +1,19 @@
+$bgColor: rgba(179, 186, 192, .2);
+$linkColor: rgba(52, 131, 204, 1);
+$linkHoverColor: rgba(235, 87, 87, 1);
+$headerHeight: 224px;
+$containerWidth: 1128px;
+$contentMaxWidth: 245px;
+
+%onHoverField {
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+}
+%onFocusField {
+  &:focus{
+    outline-style: none;
+    border-bottom: 1px solid black;
+  }
+
+}
