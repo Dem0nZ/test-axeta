@@ -1,12 +1,25 @@
-import React from 'react'
-import classes from './main.module.scss'
-import GMap from '../GMap/GMap';
+import React, { useState } from 'react'
+import styles from './main.module.scss'
+import GMap from '../gMap/GMap';
+import { useDispatch, useSelector } from 'react-redux';
+import { editUsageTime } from '../../store/infoSlice';
+import SkillLine from './SkillLine';
 
 const Main = () => {
+    const dispatch = useDispatch()
+    const skills = useSelector( ( state ) => state.info.skills )
+    const skillsElements = skills?.map( skill => {
+        return (
+            <li key={skill.id}>
+                <SkillLine {...skill} updateUsageTime={(payload) => { dispatch(editUsageTime(payload)) }}/>
+            </li>
+        )
+    })
+    console.log( skillsElements )
     return (
         <div className='container'>
-            <div className={ classes.content }>
-                <div className={ classes.portfolio }>
+            <div className={ styles.content }>
+                <div className={ styles.portfolio }>
                     <h2>
                         Portfolio
                     </h2>
@@ -25,30 +38,21 @@ const Main = () => {
                         </li>
                     </ul>
                 </div>
-                <div className={ classes.experience }>
+                <div className={ styles.experience }>
                     <h2>
                         Experience
                     </h2>
                     <ul>
-                        <li>
-                            <p>JS</p>
-                            <span contentEditable>6 years</span>
-                        </li>
-                        <li>
-                            <p>HTML</p>
-                            <span contentEditable>2 years</span>
-                        </li>
-                        <li>
-                            <p>CSS</p>
-                            <span contentEditable>4,5 years</span>
-                        </li>
+
+                        { skillsElements }
+
                     </ul>
                 </div>
-                <div className={ classes.sampleCode }>
+                <div className={ styles.sampleCode }>
                     <h2>
                         Sample Code
                     </h2>
-                    <div className={ classes.code }>
+                    <div className={ styles.code }>
                         <span>&lt;div className='golden-grid'&gt;
                             &lt;div style='grid-area:
                             11 / 1 / span 10 / span 12;'
@@ -56,7 +60,7 @@ const Main = () => {
                         </span>
                     </div>
                 </div>
-                <div className={ classes.availability }>
+                <div className={ styles.availability }>
                     <h2>
                         Availability
                     </h2>
@@ -70,33 +74,33 @@ const Main = () => {
                         GitHub, Mac OSX
                     </span>
                 </div>
-                <div className={ classes.quote }>
+                <div className={ styles.quote }>
                     <h2>
                         The Most Amaizing...
                     </h2>
-                    <div className={ classes.quoteBlock }>
+                    <div className={ styles.quoteBlock }>
                         <span>
                             The only true wisdom is in knowing you know nothing...
                         </span>
                     </div>
                 </div>
-                <div className={ classes.quote }>
+                <div className={ styles.quote }>
                     <h2>
                         In clients I look for...
                     </h2>
-                    <div className={ classes.quoteBlock }>
+                    <div className={ styles.quoteBlock }>
                         <span>
                             There is only one good, knowledge, and one evil, ignorance.
                         </span>
                     </div>
 
                 </div>
-                <div className={ classes.gMap }>
-                    <GMap isMarkerShown={ false }
-                          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-                          loadingElement={<div style={{ height: `100%` }} />}
-                          containerElement={<div style={{ height: `200px` }} />}
-                          mapElement={<div style={{ height: `100%`, borderRadius: '6px' }} />}
+                <div className={ styles.gMap }>
+                    <GMap isMarkerShown={ true }
+                          googleMapURL='https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places'
+                          loadingElement={ <div style={ { height: `100%` } }/> }
+                          containerElement={ <div style={ { height: `200px` } }/> }
+                          mapElement={ <div style={ { height: `100%`, borderRadius: '6px' } }/> }
                     />
                 </div>
             </div>

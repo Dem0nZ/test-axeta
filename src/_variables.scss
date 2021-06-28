@@ -14,6 +14,7 @@ $contentMaxWidth: 245px;
   &:focus{
     outline-style: none;
     border-bottom: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.06);
   }
 
 }

@@ -1,7 +1,7 @@
 @import "../../variables";
 
 .header {
-  height: $headerHeight;
+  min-height: $headerHeight;
   padding-top: 40px;
   background: $bgColor;
 
@@ -10,6 +10,7 @@
     display: flex;
 
     .avatar {
+      flex-shrink: 0;
       height: 168px;
       width: 168px;
       border-radius: 50%;
@@ -52,9 +53,11 @@
       }
       .skills {
         display: flex;
+        flex-wrap: wrap;
         margin-top: 16px;
 
         .skill {
+          position: relative;
           color: #fff;
           background-color: #333;
           padding: 4px 8px;
@@ -63,6 +66,15 @@
           font-size: 14px;
           line-height: 16px;
           margin-right: 8px;
+          margin-top: 8px;
+        }
+
+        .addSkill {
+          flex-grow: 1;
+          font-size: 16px;
+          line-height: 24px;
+          margin-top: 8px;
+          @extend %onFocusField;
         }
       }
     }
