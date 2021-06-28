@@ -3,24 +3,9 @@ import { createSlice } from '@reduxjs/toolkit'
 export const infoSlice = createSlice( {
     name: 'info',
     initialState: {
-        name: 'John Smitty',
-        location: 'Portland, Oregon, USA',
+        name: 'Your Name',
+        location: 'Your location',
         skills: [
-            {
-                id: '1111111',
-                skill: 'JS',
-                usageTime: '2'
-            },
-            {
-                id: '333222',
-                skill: 'HTML',
-                usageTime: '2'
-            },
-            {
-                id: '6432221',
-                skill: 'PHP',
-                usageTime: '1'
-            }
         ]
     },
 
