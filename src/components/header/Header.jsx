@@ -1,22 +1,33 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styles from './header.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import SimpleReactValidator from 'simple-react-validator'
 import { addSkill, editLocation, editName } from '../../store/infoSlice';
 import SkillBox from './SkillBox';
+import InputField from './InputField';
+
+const getNameValidationError = (name) => {
+    const pattern = /^[\s\da-zA-Zа-яА-Я]+$/
+    return (name.match(pattern) === null) ? 'Name is not valid' : null
+}
 
 const Header = () => {
     const [ isAddingSkill, setAddingSkill ] = useState( false )
     const addSkillRef = useRef(null)
     const info = useSelector( ( state ) => state.info )
     const dispatch = useDispatch()
-    const simpleValidator = useRef( new SimpleReactValidator() )
+
+    const [nameValidationError, setNameValidationError] = useState(getNameValidationError(info.name))
+    const nameValidator = (name) => {
+        setNameValidationError(getNameValidationError(name))
+    }
 
     useEffect(()=> {
         if(addSkillRef.current) {
             addSkillRef.current.focus()
         }
     },[isAddingSkill])
+
+    //const sortSkills = info.skills?.sort((a, b) => a.usageTime > b.usageTime ? -1 : 1)
 
     const skills = info.skills?.map( skill => <SkillBox id={skill.id} skill={skill.skill}/> )
 
@@ -28,20 +39,17 @@ const Header = () => {
 
                     </div>
                     <div className={ styles.info }>
-                        <h1 className={ styles.name }
-                            onBlur={ ( e ) => dispatch( editName( e.target.innerText ) ) }
-                            contentEditable>
-
-                            { info.name }
-
-                        </h1>
-                        <p className={ styles.location }
-                           onBlur={ ( e ) => dispatch( editLocation( e.target.innerText ) ) }
-                           contentEditable>
-
-                            { info.location }
-
-                        </p>
+                        <InputField
+                            isLarge={true}
+                            value={info.name}
+                            onValueChanged={nameValidator}
+                            onValueUpdated={ value => dispatch( editName(value)) }
+                            validationError={nameValidationError}
+                        />
+                        <InputField
+                            value={info.location}
+                            onValueUpdated={value => dispatch( editLocation( value ) )}
+                        />
                         <div className={ styles.language }>
                         <span>
                             🇬🇧

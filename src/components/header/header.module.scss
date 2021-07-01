@@ -6,7 +6,6 @@
   background: $bgColor;
 
   .leftBlock {
-    width: 50%;
     display: flex;
 
     .avatar {
@@ -19,16 +18,53 @@
     }
 
     .info {
+      display: flex;
       flex-grow: 1;
+      flex-direction: column;
 
-      .name {
-        font-weight: 500;
-        font-size: 40px;
-        line-height: 48px;
-        @extend %onHoverField;
-        @extend %onFocusField;
+      .fieldContainer {
+        display: flex;
+        align-items: center;
+        flex: 1;
+
+        .inputField {
+          position: relative;
+          flex: 1;
+
+          .value {
+            min-width: $fieldWidth;
+            display: flex;
+            flex: 1;
+            position: relative;
+            font-size: 16px;
+            line-height: 24px;
+            padding-right: 24px;
+            word-wrap: unset;
+            overflow: hidden;
+            @extend %onHoverField;
+            @extend %onFocusField;
+          }
+
+          .largeValue {
+            @extend .value;
+            font-weight: 500;
+            font-size: 40px;
+            line-height: 48px;
+          }
+
+          .invalidField {
+            &:focus {
+              border-bottom: 1px solid $linkHoverColor;
+            }
+          }
+        }
+
+        .errorMessage {
+          margin-left: 8px;
+          color: $linkHoverColor;
+        }
+
       }
-
 
       .location {
         font-size: 16px;
@@ -77,6 +113,7 @@
           @extend %onFocusField;
         }
       }
+
     }
   }
   .print {

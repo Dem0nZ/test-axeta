@@ -1,0 +1,18 @@
+@import "../../variables";
+
+.validationLabel {
+  position: absolute;
+  display: flex;
+  right: 4px;
+  top: calc(50% - 8px);
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(51, 193, 39, 1);
+}
+
+.error {
+  background: $linkHoverColor;
+}

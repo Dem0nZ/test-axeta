@@ -27,7 +27,7 @@ export const infoSlice = createSlice( {
             })
         },
         removeSkill: (state, action) => {
-            state.skills = state.skills.filter( skill=> skill.id != action.payload.id)
+            state.skills = state.skills.filter( skill=> skill.id !== action.payload.id)
         }
     }
 } )
