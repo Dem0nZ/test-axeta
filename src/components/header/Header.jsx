@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styles from './header.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { addSkill, editLocation, editName } from '../../store/infoSlice';
+import { addSkill, editLocation, editName, sortSkills } from '../../store/infoSlice';
 import SkillBox from './SkillBox';
 import InputField from './InputField';
 
@@ -21,15 +21,19 @@ const Header = () => {
         setNameValidationError(getNameValidationError(name))
     }
 
+    const skills = info.skills?.map( skill => <SkillBox id={skill.id} skill={skill.skill}/> )
+
+    useEffect( () => {
+        dispatch( sortSkills() )
+    },[skills])
+
     useEffect(()=> {
         if(addSkillRef.current) {
             addSkillRef.current.focus()
         }
     },[isAddingSkill])
 
-    //const sortSkills = info.skills?.sort((a, b) => a.usageTime > b.usageTime ? -1 : 1)
 
-    const skills = info.skills?.map( skill => <SkillBox id={skill.id} skill={skill.skill}/> )
 
     return (
         <div className={ styles.header }>

@@ -28,11 +28,14 @@ export const infoSlice = createSlice( {
         },
         removeSkill: (state, action) => {
             state.skills = state.skills.filter( skill=> skill.id !== action.payload.id)
+        },
+        sortSkills: (state, action) => {
+            state.skills = state.skills?.sort((a, b) => a.usageTime > b.usageTime ? -1 : 1)
         }
     }
 } )
 
 
-export const { editName, editLocation, addSkill, editUsageTime, removeSkill } = infoSlice.actions
+export const { editName, editLocation, addSkill, editUsageTime, removeSkill, sortSkills } = infoSlice.actions
 
 export default infoSlice.reducer

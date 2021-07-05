@@ -1,21 +1,29 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './main.module.scss'
 import GMap from '../gMap/GMap';
 import { useDispatch, useSelector } from 'react-redux';
 import { editUsageTime } from '../../store/infoSlice';
 import SkillLine from './SkillLine';
+import SyntaxHighlighter from 'react-syntax-highlighter'
+import { a11yLight } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 
 const Main = () => {
     const dispatch = useDispatch()
     const skills = useSelector( ( state ) => state.info.skills )
     const skillsElements = skills?.map( skill => {
         return (
-            <li key={skill.id}>
-                <SkillLine {...skill} updateUsageTime={(payload) => { dispatch(editUsageTime(payload)) }}/>
+            <li key={ skill.id }>
+                <SkillLine { ...skill } updateUsageTime={ ( payload ) => { dispatch( editUsageTime( payload ) ) } }/>
             </li>
         )
-    })
-    console.log( skillsElements )
+    } )
+    const content = `<div className='golden-grid'>
+    <div style='grid-area:
+        11 /  1 / span 10 / span
+        12;'>
+    </div>
+</div>`
+
     return (
         <div className='container'>
             <div className={ styles.content }>
@@ -53,12 +61,11 @@ const Main = () => {
                         Sample Code
                     </h2>
                     <div className={ styles.code }>
-                        <span>&lt;div className='golden-grid'&gt;
-                            &lt;div style='grid-area:
-                            11 / 1 / span 10 / span 12;'
-                            &gt;&lt;/div&gt;&lt;/div&gt;
-                        </span>
+                        <SyntaxHighlighter language='htmlbars' style={ a11yLight }>
+                            { content }
+                        </SyntaxHighlighter>
                     </div>
+
                 </div>
                 <div className={ styles.availability }>
                     <h2>
